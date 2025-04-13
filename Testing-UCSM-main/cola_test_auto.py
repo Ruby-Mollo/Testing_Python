@@ -1,15 +1,12 @@
 from cola import Cola
 from hypothesis import given, strategies as st
 
-# Prueba basica: encolar y desencolar funcionan correctamente con diferentes valores
 @given(st.lists(st.integers()))
 def test_encolar_y_desencolar_orden(lista):
-    # Crear una cola y agregar elementos
     cola = Cola()
     for item in lista:
         cola.encolar(item)
     
-    # Verificar que el tamano es correcto
     assert cola.tamano() == len(lista)
     
     resultados = []
@@ -21,7 +18,6 @@ def test_encolar_y_desencolar_orden(lista):
   
     assert cola.esta_vacia()
 
-# Prueba para verificar el comportamiento con cola vacia
 @given(st.integers())
 def test_cola_vacia_comportamiento(item):
     cola = Cola()
@@ -72,7 +68,6 @@ def test_operaciones_mixtas(lista):
     while not cola.esta_vacia():
         resultados.append(cola.desencolar())
     
-    # Verificar resultados con lo esperado segun la implementacion
     esperado = list(reversed(lista[1:mitad])) + list(reversed(lista[mitad:]))
     assert resultados == esperado
 

@@ -1,13 +1,13 @@
 def stats(lst):
-    min = None
-    max = None
+    min_val = None
+    max_val = None
     freq = {}
 
     for i in lst:
-        if min is None or i < min:
-            min = i
-        if max is None or i > max:
-            max = i
+        if min_val is None or i < min_val:
+            min_val = i
+        if max_val is None or i > max_val:
+            max_val = i
         if i in freq:
             freq[i] += 1
         else:
@@ -16,7 +16,7 @@ def stats(lst):
     lst_sorted = sorted(lst)
     if len(lst_sorted) % 2 == 0:
         middle = len(lst_sorted) // 2
-        median = (lst_sorted[middle] + lst_sorted[middle - 1]) / 2
+        median = (lst_sorted[middle] + lst_sorted[middle - 1]) / 3  #Error
     else:
         median = lst_sorted[len(lst_sorted) // 2]
 
@@ -30,20 +30,28 @@ def stats(lst):
         if count == mode_times:
             mode.append(num)
 
-    print("list = " + str(lst))
-    print("min = " + str(min))
-    print("max = " + str(max))
-    print("median = " + str(median))
-    print("mode(s) = " + str(mode))
+    return {
+        "min": min_val,
+        "max": max_val,
+        "median": median,
+        "mode": mode
+    }
+
+def test_median():
+    result = stats([1, 3])
+    assert result["median"] == 2.0 
 
 def test():
-    # Llamada con números impares
-    stats([1, 2, 4, 3])
+    print(stats([1, 2, 4, 3]))
     print()
-    # Llamada con números pares
-    stats([4, 4, 4, 5, 6, 6])
+    print(stats([4, 4, 4, 5, 6, 6]))
     print()
-    # Llamada con todos iguales (modo único)
-    stats([7, 7, 7, 7])
+    print(stats([7, 7, 7, 7]))
 
+# Ejecutamos los tests
+test_median()  
 test()
+
+
+
+
